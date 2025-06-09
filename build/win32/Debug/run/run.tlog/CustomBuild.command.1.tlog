@@ -1,0 +1,24 @@
+^C:\USERS\SHEEM\DOCUMENTS\SDL3PROVA\BUILD\CMAKEFILES\35D8769969ED636AD8302DE423694EE8\RUN.RULE
+setlocal
+cd C:\Users\sheem\Documents\sdl3prova\build\bin
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+C:\Users\sheem\Documents\sdl3prova\build\bin\Convenience.exe
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\SHEEM\DOCUMENTS\SDL3PROVA\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/sheem/Documents/sdl3prova -BC:/Users/sheem/Documents/sdl3prova/build --check-stamp-file C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

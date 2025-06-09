@@ -1,0 +1,10 @@
+^C:\USERS\SHEEM\DOCUMENTS\SDL3PROVA\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/sheem/Documents/sdl3prova -BC:/Users/sheem/Documents/sdl3prova/build --check-stamp-file C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

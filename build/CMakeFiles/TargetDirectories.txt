@@ -1,0 +1,5 @@
+C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/JaydesSDL3.dir
+C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/run.dir
+C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/build_and_run.dir
+C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/sheem/Documents/sdl3prova/build/CMakeFiles/ZERO_CHECK.dir
