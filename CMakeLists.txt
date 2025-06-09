@@ -68,6 +68,7 @@ if(WIN32)
         SDL3
         SDL3_test
         SDL3_image
+        SDL3_ttf
     )
 else()
     # For other platforms, try to find SDL3 using find_package
@@ -78,7 +79,7 @@ endif()
 
 if(WIN32)
     # Copy SDL3.dll to output directory on Windows
-    add_custom_command(TARGET JaydesSDL3 POST_BUILD
+        add_custom_command(TARGET JaydesSDL3 POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_SOURCE_DIR}/lib/${SDL3_ARCH}/SDL3.dll"
         $<TARGET_FILE_DIR:JaydesSDL3>
@@ -89,6 +90,12 @@ if(WIN32)
         "${CMAKE_SOURCE_DIR}/lib/${SDL3_ARCH}/SDL3_image.dll"
         $<TARGET_FILE_DIR:JaydesSDL3>
         COMMENT "Copying SDL3_image.dll to output directory"
+        )
+        add_custom_command(TARGET JaydesSDL3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/lib/${SDL3_ARCH}/SDL3_ttf.dll"
+        $<TARGET_FILE_DIR:JaydesSDL3>
+        COMMENT "Copying SDL3_ttf.dll to output directory"
         )
         # Copy audio folder to output directory
         add_custom_command(TARGET JaydesSDL3 POST_BUILD
@@ -104,6 +111,12 @@ if(WIN32)
         "${CMAKE_SOURCE_DIR}/images"
         "$<TARGET_FILE_DIR:JaydesSDL3>/images"
         COMMENT "Copying images folder to output directory"
+        )
+        add_custom_command(TARGET JaydesSDL3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/font"
+        "$<TARGET_FILE_DIR:JaydesSDL3>/font"
+        COMMENT "Copying font folder to output directory"
         )
 endif()
 
