@@ -235,7 +235,7 @@ void SDL_AppQuit(void* appstate, SDL_AppResult result)
 
 void TextShow(){
     double pos = AudioPos();  /* get the audio position */
-    char* Testo = "";
+    char* Testo = "PRova di testo";
     SDL_Log("Audio position: %f seconds", pos);
 
     text_surface = TTF_RenderText_Blended(font, Testo, 0, {0,0,0, 255});
