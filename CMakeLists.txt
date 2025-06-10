@@ -28,7 +28,7 @@ if(WIN32)
 endif()
 
 if(WIN32)
-    add_executable(JaydesSDL3 main.cpp)
+    add_executable(JaydesSDL3 WIN32 main.cpp)
 else()
     add_executable(JaydesSDL3 main.cpp)
 endif()

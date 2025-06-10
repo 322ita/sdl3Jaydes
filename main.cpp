@@ -65,6 +65,7 @@ std::ostringstream oss;
 
 void TextShow();
 double AudioPos();
+void Lyrics(std::string &text, double pos);
 
 /* This function runs once at startup. */
 SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
@@ -244,16 +245,16 @@ void TextShow(){
     std::string Testo = "Convenience";  /* text to render */
     oss.clear();  /* clear the string stream */
     oss.str("");  /* clear the string stream */
-     if(pos>= 0){
-        // oss << std::fixed << std::setprecision(2) << pos;  /* set the precision to 2 decimal places */
-        // Testo = oss.str();  /* convert the double to a string */
-        Testo = "Convenience - " + std::to_string(int(pos)) + " seconds";  /* convert the double to a string */
-     }
+    //  if(pos>= 0){
+    //     oss << std::fixed << std::setprecision(2) << pos;  /* set the precision to 2 decimal places */
+    //     Testo = "first\nsecond\nthird\nforth "+oss.str();  /* convert the double to a string */
+    //     //Testo = "Convenience - " + std::to_string(int(pos)) + " seconds";  /* convert the double to a string */
+    //  }
           /* convert the integer to a string */
-
+    Lyrics(Testo, pos);  /* get the lyrics */
     //SDL_Log("Audio position: %f seconds", pos);
     SDL_DestroySurface(text_surface);  /* free the old surface */                   //fix memory leak
-    text_surface = TTF_RenderText_Blended(font, Testo.c_str(), 0, {0,0,0, 255});
+    text_surface = TTF_RenderText_Blended_Wrapped(font, Testo.c_str(), 0, {0,0,0, 255},0);
     SDL_DestroyTexture(text_texture);  /* destroy the old texture */
     text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
     
@@ -269,3 +270,112 @@ double AudioPos(){
     //SDL_Log("Audio data read from stream: %f bytes, len: %f, now: %f", seconds_remaining, full_seconds, full_seconds - seconds_remaining);
     return full_seconds-seconds_remaining;  /* return the seconds remaining */
 }
+
+void Lyrics(std::string &text, double pos){
+    if(pos >= 0.3)
+        text = "Yeah";
+    if(pos >= 1.181)
+        text = "I still love you";
+    if(pos >= 2.284)
+        text = "you can't know that yet";
+    if(pos >= 4.519)
+        text = "Your voice deteriorates\nin my";
+    if(pos >= 6.743)
+        text = "Your voice deteriorates\nin my head";
+    if(pos >= 8.031)
+        text = "I got no time to waste,\nthat's just lately";
+    if(pos >= 11.283)
+        text = "I got hoes I don't want\nin my bed";
+    if(pos >= 14.371)
+        text = "You know exactly";
+    if(pos >= 15.836)
+        text = "You know exactly\nwhat you're doing";
+    if(pos >= 18.113)
+        text = "uh";
+    if(pos >= 21.089)
+        text = "You know exactly";
+    if(pos >= 22.670)
+        text = "You know exactly\nwhat you're doing";
+    if(pos >= 24.904)
+        text = "yeah";
+    if(pos >= 26.582)
+        text = "She don't give a fuck";
+    if(pos >= 28.648)
+        text = "She broke my heart\nbut it got my money up";
+    if(pos >= 31.697)
+        text = "And i think I smoked\ntoo much";
+    if(pos >= 33.186)
+        text = "'cause I can't run\nfrom you anymore";
+    if(pos >= 35.461)
+        text = "Behind closed doors\nI say,";
+    if(pos >= 37.140)
+        text = "\"Damn\"";
+    if(pos >= 37.962)
+        text = "Can't believe you'd\ndo this to me";
+
+    if(pos >= 40.093)
+        text = "She don't give a fuck";
+    if(pos >= 42.146)
+        text = "She broke my heart\nbut it got my money up";
+    if(pos >= 45.209)
+        text = "And i think I smoked\ntoo much";
+    if(pos >= 46.649)
+        text = "'cause I can't run\nfrom you anymore";
+    if(pos >= 48.984)
+        text = "Behind closed doors\nI say,";
+    if(pos >= 50.647)
+        text = "\"Damn\"";
+    if(pos >= 52.392)
+        text = "Behind closed doors\nI'm like,";
+    if(pos >= 54.056)
+        text = "\"Damn\"";
+    if(pos >= 55.372)
+        text = "I swear that you're only\nhere";
+    if(pos >= 56.945)
+        text = "when you need me";
+    if(pos >= 58.625)
+        text = "I swear that you're only\nhere";
+    if(pos >= 60.155)
+        text = "when you need me";
+    if(pos >= 62.092)
+        text = "I swear that you're only\nhere";
+    if(pos >= 63.806)
+        text = "when you need me";
+    if(pos >= 65.254)
+        text = "When it's convenient";
+    if(pos >= 66.388)
+        text = "";
+    
+}
+
+
+/*
+
+[Intro]
+(You have no heart!)
+Yeah, I still love you, you can't know that yet (Can't know that yet)
+Your voice deteriorates in my head
+I got no time to waste, that's just lately (That's just lately)
+I got hoes I don't want in my bed
+You know exactly what you're doing, uh
+You know exactly what you're doing, yeah
+
+[Verse]
+She don't give a fuck (She don't give a fuck)
+She broke my heart but it got my money up (Got my money up)
+And I think I smoked too much 'cause I can't run from you anymore
+Behind closed doors I say, "Damn
+Can't believe you'd do this to me"
+She don't give a fuck (She don't give a fuck)
+She broke my heart but it got my money up (Got my money up)
+And I think I smoked too much 'cause I can't run from you anymore
+Behind closed doors I say, "Damn"
+
+[Outro]
+Behind closed doors I'm like, "Damn"
+I swear that you're only here when you need me
+I swear that you're only here when you need me
+I swear that you're only here when you need me
+When it's convenient
+
+*/
