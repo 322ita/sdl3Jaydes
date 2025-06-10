@@ -1,1 +1,36 @@
+# Ignora la cartella build
 build/
+
+# File generati da Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# File oggetto e binari
+*.obj
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.ncb
+*.sdf
+*.opensdf
+*.opendb
+
+# Directory specifiche di Visual Studio
+.vs/
+ipch/
+Debug/
+Release/
+x64/
+x86/
+.vscode/
+
+# File cmake generati
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake

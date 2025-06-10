@@ -14,6 +14,9 @@
 #include <SDL3/SDL_image.h>
 #include<SDL3/SDL_audio.h>
 #include<SDL3/SDL_ttf.h>
+#include <string>
+#include <iomanip>
+#include <sstream>
  /* We will use this renderer to draw into this window every frame. */
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
@@ -56,6 +59,7 @@ char* font_path = NULL;  /* path to the font file */
 TTF_Font *font = NULL;  /* font for rendering text */
 SDL_Surface *text_surface = NULL;  /* surface for rendering text */
 SDL_Texture *text_texture = NULL;  /* texture for rendering text */
+std::ostringstream oss;
 
 
 
@@ -206,19 +210,21 @@ SDL_AppResult SDL_AppIterate(void* appstate)
         SDL_RenderTexture(renderer, LeftH_texture, NULL, &LeftH_rect);  /* render the texture to the window. */
         SDL_RenderTexture(renderer, RightH_texture, NULL, &RightH_rect);  /* render the texture to the window. */
         
-        SDL_SetTextureScaleMode(UpH_texture, SDL_SCALEMODE_NEAREST);
-        SDL_SetTextureScaleMode(DownH_texture, SDL_SCALEMODE_NEAREST);
-        SDL_SetTextureScaleMode(LeftH_texture, SDL_SCALEMODE_NEAREST);
-        SDL_SetTextureScaleMode(RightH_texture, SDL_SCALEMODE_NEAREST);
-
+        
+        
 
         TextShow();
+        //SDL_Log("Audio position: %f seconds", AudioPos());
 
         if( SDL_GetAudioStreamQueued(audio_stream) == 0) {
         return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
     }
     SDL_RenderTexture(renderer, text_texture, NULL, NULL);  /* render the texture to the window. */
+    SDL_SetTextureScaleMode(UpH_texture, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(DownH_texture, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(LeftH_texture, SDL_SCALEMODE_NEAREST);
+    SDL_SetTextureScaleMode(RightH_texture, SDL_SCALEMODE_NEAREST);
     /* put the newly-cleared rendering on the screen. */
     SDL_RenderPresent(renderer);
 
@@ -235,12 +241,23 @@ void SDL_AppQuit(void* appstate, SDL_AppResult result)
 
 void TextShow(){
     double pos = AudioPos();  /* get the audio position */
-    char* Testo = "PRova di testo";
-    SDL_Log("Audio position: %f seconds", pos);
+    std::string Testo = "Convenience";  /* text to render */
+    oss.clear();  /* clear the string stream */
+    oss.str("");  /* clear the string stream */
+     if(pos>= 0){
+        // oss << std::fixed << std::setprecision(2) << pos;  /* set the precision to 2 decimal places */
+        // Testo = oss.str();  /* convert the double to a string */
+        Testo = "Convenience - " + std::to_string(int(pos)) + " seconds";  /* convert the double to a string */
+     }
+          /* convert the integer to a string */
 
-    text_surface = TTF_RenderText_Blended(font, Testo, 0, {0,0,0, 255});
+    //SDL_Log("Audio position: %f seconds", pos);
+    SDL_DestroySurface(text_surface);  /* free the old surface */                   //fix memory leak
+    text_surface = TTF_RenderText_Blended(font, Testo.c_str(), 0, {0,0,0, 255});
+    SDL_DestroyTexture(text_texture);  /* destroy the old texture */
     text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
-
+    
+    
 
 }
 
