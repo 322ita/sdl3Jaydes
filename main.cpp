@@ -1,34 +1,24 @@
-/* clear.c ... */
-
-/*
- * This example code creates an SDL window and renderer, and then clears the
- * window to a different color every frame, so you'll effectively get a window
- * that's smoothly fading between colors.
- *
- * This code is public domain. Feel free to use it for any purpose!
- */
-
-#define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
+#define SDL_MAIN_USE_CALLBACKS 1 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_image.h>
-#include<SDL3/SDL_audio.h>
-#include<SDL3/SDL_ttf.h>
+#include <SDL3/SDL_audio.h>
+#include <SDL3/SDL_ttf.h>
 #include <string>
 #include <iomanip>
 #include <sstream>
- /* We will use this renderer to draw into this window every frame. */
+
 static SDL_Window* window = NULL;
 static SDL_Renderer* renderer = NULL;
 
-char* wav_path = NULL;  /* path to the WAV file */
-static SDL_AudioSpec audio_spec;  /* audio spec for the WAV file */
-static SDL_AudioStream *audio_stream = NULL;  /* audio stream for the WAV file */
-static Uint8* audio_buf = NULL;  /* audio buffer for the WAV file */
-static Uint32 audio_len = 0;  /* length of the audio buffer */
+char* wav_path = NULL;  
+static SDL_AudioSpec audio_spec;
+static SDL_AudioStream *audio_stream = NULL;  
+static Uint8* audio_buf = NULL;  
+static Uint32 audio_len = 0;  
 
-bool started = false;  /* flag to check if audio has started playing */
-bool playing = false;  /* flag to check if audio is playing */
+bool started = false;  
+bool playing = false; 
 
 char* UpH_path = NULL;  
 SDL_Surface* UpH_surface = NULL;  
@@ -93,7 +83,7 @@ SDL_AppResult SDL_AppInit(void** appstate, int argc, char* argv[])
         SDL_Log("Couldn't open font: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-    text_surface = TTF_RenderText_Blended(font, "Convenience", 0, {0,0,0, 255});
+    text_surface = TTF_RenderText_Blended_Wrapped(font, "Convenience\nPRESS SPACE\nTO START", 0, {0,0,0, 255},0);
     if (!text_surface) {
         SDL_Log("Couldn't render text: %s", SDL_GetError());
         return SDL_APP_FAILURE;
